@@ -177,7 +177,7 @@ dice-icon button:hover{
 }
 
 dice-object[sides='10'] .value{
-    padding-left: 2rem;
+    padding-left: 2.5rem;
 }
 
 dice-object[sides='10']{
