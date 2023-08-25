@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+body {
+	background-color: #1d2842;
+	display: grid;
+	min-height: 100vh;
+	place-content: center;
+}
+
+#app {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+#table-top {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	min-height: 120px;
+	max-width: calc(100vw - 80px);
+}
+
+dice-object {
+    aspect-ratio: 1;
+    color: #fff;
+    display: grid;
+    font-size: 40px;
+    font-weight: bold;
+    place-content: center;
+    position: relative;
+    text-shadow: 0 0 16px #1d2842;
+    user-select: none;
+    width: 120px;
+}
+
+dice-object svg {
+    fill: none;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+dice-object[sides="20"] svg,
+dice-object[sides="8"] svg,
+dice-object[sides="6"] svg {
+    left: 8px;
+}
+
+dice-object[sides="12"] svg {
+    left: 4px;
+}
+
+
+#controls {
+	display: flex;
+	gap: 16px;
+    animation: entry ease-in-out .7s;
+}
+
+dice-icon {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+dice-icon button {
+    appearance: none;
+    aspect-ratio: 1;
+    background-color: #171e2b;
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    user-select: none;
+    width: 24px;
+    transition: all ease-in-out .3s;
+    
+    &[disabled] {
+        background-color: transparent;
+        border: 1px solid #171e2b;
+        color: #171e2b;
+        outline: none;
+        pointer-events: none;
+    }
+}
+
+dice-icon button:hover{
+    outline: 1px solid #fff;
+    transform: scale(1.1);
+}
+
+	.increment {
+		order: 0;
+	}
+	
+	.decrement {
+		order: 2;
+	}
+	
+	.icon {
+		aspect-ratio: 1;
+		color: #fff;
+		font-weight: bold;
+		display: grid;
+		padding: 8px 0;
+		place-content: center;
+		position: relative;
+		user-select: none;
+		width: 40px;
+	}
+	
+	svg {
+		position: absolute;
+		top: 8px;
+		width: 40px;
+		z-index: -1;
+	}
+	
+	&[sides="20"] svg,
+	&[sides="8"] svg,
+	&[sides="6"] svg{
+		left: 2px;
+	}
+	
+	&[sides="12"] svg {
+		left: 1px;
+	}
+	
+	&[sides="4"] {
+		.icon {
+			padding-bottom: 7px;
+			padding-top: 9px;
+		}
+		
+		svg {
+			top: 9px;
+		}
+	}
+
+
+#roll, #clear{
+	appearance: none;
+	background-color: #7cc584;
+	border: none;
+	border-bottom: 2px solid #3d6a70;
+	border-top: 1px solid #abe0bf;
+    letter-spacing: 1px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 8px 24px;
+	user-select: none;
+    transition: all ease-in-out .3s;
+    animation: entry ease-in-out .7s;
+	
+	
+	&[disabled] {
+		background-color: #e7e7e7;
+		border-bottom-color: #aaa;
+		border-top-color: #f9f9f9;
+		outline: none;
+		pointer-events: none;
+	}
+}
+
+#clear:hover, #roll:hover{
+    outline: 1px solid #f9f9f9;
+    background-color: #41924a;
+}
+
+dice-object[sides='10'] .value{
+    padding-left: 2rem;
+}
+
+dice-object[sides='10']{
+    right: 1rem;
+}
+
+dice-object[sides='4'] .value{
+    padding-left: 3rem;
+}
+
+dice-object[sides='4'] {
+    right: 1rem;
+}
+
+
+input {
+    -moz-appearance: textfield;
+    appearance: textfield; 
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px;
+    margin: 0; 
+    text-align: center;
+    width: 50px;
+    height: 30px;
+    background-color: #7cc584;
+    color: #000000;
+    transition: all ease-in-out .3s;
+    animation: entry ease-in-out .9s;
+}
+
+input:hover{
+    width: 60px;
+    height: 40px;
+    background-color: #41924a;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+input:focus::placeholder{
+    color: transparent;
+}
+
+@keyframes entry{
+    from{
+        opacity: 0;
+        transform: scale(0);
+    }
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#results{
+    color: #f9f9f9;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 16px;
+}
