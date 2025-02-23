@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/diceIcon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/nexus-icon.png" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
-    <title>Dice Roller</title>
+    <title>Nexus Dice Roller</title>
 </head>
 <body>
     <div id="app">
+		<h1 class="app-title">
+			<img src="assets/nexus-icon.png" alt="">
+			<div>
+				<span class="nexus-title">Nexus Dice Roller</span>
+			</div>
+			<img src="assets/nexus-icon.png" alt="">
+		</h1>
 	<div id="table-top"></div>
 	<div id="controls">
 		<dice-icon sides="20"></dice-icon>
@@ -18,11 +25,12 @@
 		<dice-icon sides="6"></dice-icon>
 		<dice-icon sides="4"></dice-icon>
 	</div>
-	<button id="roll" disabled>Rolar</button>
-    <input type="number" id="buff" placeholder="Bônus">
-    <button id="clear">Limpar</button>
+	<input type="number" id="buff" placeholder="Bônus">
+	<div class="roll-and-clear-container">
+		<button id="roll" disabled>Rolar</button>
+		<button id="clear" disabled>Limpar</button>
+	</div>
     <div id="results"></div>
-
 </div>
 
 <!-- Templates -->
@@ -122,6 +130,7 @@
 		</g>
 	</defs>
 </svg>
+<audio id="roll-sound" src="assets/som-dado.mp3"></audio>
 </body>
 <script src="./script.js"></script>
 </html>
