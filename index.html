@@ -33,6 +33,12 @@
     <div id="results"></div>
 </div>
 
+    <div class="language-selector">
+        <button onclick="LanguageManager.getInstance().setLanguage('pt')">PT</button>
+        <button onclick="LanguageManager.getInstance().setLanguage('en')">EN</button>
+        <button onclick="LanguageManager.getInstance().setLanguage('es')">ES</button>
+    </div>
+
 <!-- Templates -->
 <template id="dice-icon">
 	<button class="increment">+</button>
@@ -132,6 +138,7 @@
 </svg>
 <audio id="roll-sound" src="assets/som-dado.mp3"></audio>
 </body>
+<script src="./translations.js"></script>
 <script src="./script.js"></script>
 </html>
 
