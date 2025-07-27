@@ -91,9 +91,12 @@ dice-object svg {
 
 dice-object[sides="20"] svg,
 dice-object[sides="8"] svg,
-dice-object[sides="100"] svg,
 dice-object[sides="6"] svg {
   left: 8px;
+}
+
+dice-object[sides="100"] svg {
+  left: 2px;
 }
 
 dice-object[sides="3"] svg {
