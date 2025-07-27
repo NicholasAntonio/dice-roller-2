@@ -1,3 +1,4 @@
+
 class DiceObject extends HTMLElement {
     constructor() {
         super();
@@ -5,11 +6,18 @@ class DiceObject extends HTMLElement {
         const templateContent = template.content;
         this.appendChild(templateContent.cloneNode(true));
         let sides = this.getAttribute('sides');
+        let svgId = `d${sides}`;
+        let viewBox = '0 0 33 33';
+        if (sides === '100') {
+            viewBox = '0 0 33 33';
+        } else if (sides === '3') {
+            viewBox = '0 0 33 33';
+        }
         this.innerHTML += `
             <div class="die">
                 <div class="value">${sides}</div>
-                <svg viewBox="0 0 33 33">
-                    <use xlink:href="#d${sides}"></use>
+                <svg viewBox="${viewBox}">
+                    <use xlink:href="#${svgId}"></use>
                 </svg>
             </div>
         `;
@@ -17,6 +25,7 @@ class DiceObject extends HTMLElement {
 }
 
 customElements.define('dice-object', DiceObject);
+
 
 class DiceIcon extends HTMLElement {
     constructor() {
@@ -47,14 +56,16 @@ class DiceIcon extends HTMLElement {
         this.querySelector('.decrement').addEventListener('click', function(e) {
             let sides = e.target.parentElement.getAttribute('sides');
             let correspondingDice = document.querySelectorAll(`dice-object[sides="${sides}"]`);
-            correspondingDice[0].remove();
+            if (correspondingDice.length > 0) {
+                correspondingDice[0].remove();
+            }
             if (correspondingDice.length === 1) {
                 e.target.setAttribute('disabled', '');
             }
             let dice = document.querySelectorAll('dice-object');
             if (dice.length < 1) {
                 document.getElementById('roll').setAttribute('disabled', '');
-                document.getElementById('roll').setAttribute('clear', '');
+                document.getElementById('clear').setAttribute('disabled', '');
             }
         });
     }
@@ -72,6 +83,7 @@ document.getElementById('clear').addEventListener('click', function() {
     document.getElementById('clear').setAttribute('disabled', '');
 });
 
+
 document.getElementById('roll').addEventListener('click', function() {
     const rollSound = document.getElementById('roll-sound');
     rollSound.currentTime = 0;
@@ -86,7 +98,7 @@ document.getElementById('roll').addEventListener('click', function() {
     const interval = 50;
 
     let rolls = Array.from(dice).map(die => {
-        let sides = die.getAttribute('sides');
+        let sides = parseInt(die.getAttribute('sides'));
         return { die, sides };
     });
 
@@ -100,8 +112,7 @@ document.getElementById('roll').addEventListener('click', function() {
         animationTime += interval;
         if (animationTime >= animationDuration) {
             clearInterval(animationInterval);
-            rolls.forEach(({ die }) => {
-                let sides = die.getAttribute('sides');
+            rolls.forEach(({ die, sides }) => {
                 let finalRoll = Math.floor(Math.random() * sides + 1);
                 die.querySelector('.value').innerText = finalRoll;
                 totalSum += finalRoll;

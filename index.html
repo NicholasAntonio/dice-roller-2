@@ -1,148 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/nexus-icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="assets/nexus-icon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="styles.css" />
     <title>Nexus Dice Roller</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="app">
-		<h1 class="app-title">
-			<img src="assets/nexus-icon.png" alt="">
-			<div>
-				<span class="nexus-title">Nexus Dice Roller</span>
-			</div>
-			<img src="assets/nexus-icon.png" alt="">
-		</h1>
-	<div id="table-top"></div>
-	<div id="controls">
-		<dice-icon sides="20"></dice-icon>
-		<dice-icon sides="12"></dice-icon>
-		<dice-icon sides="10"></dice-icon>
-		<dice-icon sides="8"></dice-icon>
-		<dice-icon sides="6"></dice-icon>
-		<dice-icon sides="4"></dice-icon>
-	</div>
-	<input type="number" id="buff" placeholder="Bônus">
-	<div class="roll-and-clear-container">
-		<button id="roll" disabled>Rolar</button>
-		<button id="clear" disabled>Limpar</button>
-	</div>
-    <div id="results"></div>
-</div>
+      <h1 class="app-title">
+        <img src="assets/nexus-icon.png" alt="" />
+        <div>
+          <span class="nexus-title">Nexus Dice Roller</span>
+        </div>
+        <img src="assets/nexus-icon.png" alt="" />
+      </h1>
+      <div id="table-top"></div>
+      <div id="controls">
+        <dice-icon sides="100"></dice-icon>
+        <dice-icon sides="20"></dice-icon>
+        <dice-icon sides="12"></dice-icon>
+        <dice-icon sides="10"></dice-icon>
+        <dice-icon sides="8"></dice-icon>
+        <dice-icon sides="6"></dice-icon>
+        <dice-icon sides="4"></dice-icon>
+        <dice-icon sides="3"></dice-icon>
+      </div>
+      <input type="number" id="buff" placeholder="Bônus" />
+      <div class="roll-and-clear-container">
+        <button id="roll" disabled>Rolar</button>
+        <button id="clear" disabled>Limpar</button>
+      </div>
+      <div id="results"></div>
+    </div>
 
-<!-- Templates -->
-<template id="dice-icon">
-	<button class="increment">+</button>
-	<button class="decrement" disabled>-</button>
-</template>
+    <!-- Templates -->
+    <template id="dice-icon">
+      <button class="increment">+</button>
+      <button class="decrement" disabled>-</button>
+    </template>
 
-<template id="dice-object"></template>
+    <template id="dice-object"></template>
 
-<!-- Sprites -->
-<svg style="display: none;">
-	<style>
-		.outer-line {
-			stroke: #000;
-			stroke-linecap: round;
-			stroke-linejoin: round;
-		}
-		.inner-line {
-			stroke: #253d63;
-			stroke-linecap: round;
-			stroke-linejoin: round;
-			stroke-width: 0.5px;
-		}
-	</style>
-	<defs>
-		<!-- dice -->
-		<g id="d20">
-			<polygon class="inner-line" points="14.36 7.44 6.84 20.47 21.88 20.47 14.36 7.44" />
-			<line class="inner-line" x1="14.36" y1="7.44" x2="14.36" y2=".5" />
-			<line class="inner-line" x1="21.88" y1="20.47" x2="28.21" y2="8.5" />
-			<line class="inner-line" x1="6.84" y1="20.47" x2="14.36" y2="32.5" />
-			<line class="inner-line" x1="14.36" y1="7.44" x2=".5" y2="8.5" />
-			<line class="inner-line" x1="21.88" y1="20.47" x2="28.21" y2="24.5" />
-			<line class="inner-line" x1="6.84" y1="20.47" x2=".5" y2="24.5" />
-			<line class="inner-line" x1=".5" y1="8.5" x2="6.84" y2="20.47" />
-			<line class="inner-line" x1="14.36" y1="7.44" x2="28.21" y2="8.5" />
-			<line class="inner-line" x1="21.88" y1="20.47" x2="14.36" y2="32.5" />
-			<polygon class="outer-line" style="stroke: #2f74d2;" points="28.21 24.5 28.21 8.5 14.36 .5 .5 8.5 .5 24.5 14.36 32.5 28.21 24.5" />
-    	</g>
-		<g id="d12">
-			<polygon class="inner-line" points="15.72 6.76 6.04 13.79 9.74 25.16 21.69 25.16 25.39 13.79 15.72 6.76" />
-			<line class="inner-line" x1="15.72" y1="6.76" x2="15.72" y2=".5" />
-			<line class="inner-line" x1="25.39" y1="13.79" x2="30.93" y2="11.56" />
-			<line class="inner-line" x1="21.69" y1="25.16" x2="25.12" y2="29.44" />
-			<line class="inner-line" x1="9.74" y1="25.16" x2="6.31" y2="29.44" />
-			<line class="inner-line" x1="6.04" y1="13.79" x2=".5" y2="11.56" />
-			<polygon class="outer-line" style="stroke: #da312e;" points="30.93 21.44 30.93 11.56 25.12 3.56 15.72 .5 6.31 3.56 .5 11.56 .5 21.44 6.31 29.44 15.72 32.5 25.12 29.44 30.93 21.44" />
-		</g>
-		<g id="d10">    
-			<line class="inner-line" x1="16.5" y1="32.5" x2="16.5" y2="19.21" />
-			<line class="inner-line" x1="8.63" y1="14.77" x2="16.5" y2="19.21" />
-			<line class="inner-line" x1=".5" y1="16.5" x2="8.63" y2="14.77" />
-			<line class="inner-line" x1="16.5" y1=".5" x2="8.63" y2="14.77" />
-			<line class="inner-line" x1="24.37" y1="14.77" x2="16.5" y2="19.21" />
-			<line class="inner-line" x1="32.5" y1="16.5" x2="24.37" y2="14.77" />
-			<line class="inner-line" x1="16.5" y1=".5" x2="24.37" y2="14.77" />
-			<rect class="outer-line" style="stroke: #e97a26;" x="5.19" y="5.19" width="22.63" height="22.63" transform="translate(-6.83 16.5) rotate(-45)" />
-		</g>
-		<g id="d8">
-			<line class="inner-line" class="cls-2" x1="14.36" y1=".5" x2=".5" y2="24.5" />
-			<line class="inner-line" class="cls-2" x1="28.21" y1="24.5" x2="14.36" y2=".5" />
-			<line class="inner-line" class="cls-2" x1=".5" y1="24.5" x2="28.21" y2="24.5" />
-			<polygon class="outer-line" style="stroke: #604896;" points="28.21 24.5 28.21 8.5 14.36 .5 .5 8.5 .5 24.5 14.36 32.5 28.21 24.5" />
-		</g>
-		<g id="d6">
-			<line class="inner-line" x1="14.36" y1="32.5" x2="14.36" y2="16.5" />
-			<line class="inner-line" x1=".5" y1="8.5" x2="14.36" y2="16.5" />
-			<line class="inner-line" x1="28.21" y1="8.5" x2="14.36" y2="16.5" />
-			<polygon class="outer-line" style="stroke: #3f9554;" points="28.21 24.5 28.21 8.5 14.36 .5 .5 8.5 .5 24.5 14.36 32.5 28.21 24.5" />
-		</g>
-		<g id="d4">
-			<line class="inner-line" x1="16.5" y1=".5" x2="16.5" y2="18.98" />
-			<line class="inner-line" x1=".5" y1="28.21" x2="16.5" y2="18.98" />
-			<line class="inner-line" x1="32.5" y1="28.21" x2="16.5" y2="18.98" />
-			<polygon class="outer-line" style="stroke: #cd3624;" points="16.5 .5 .5 28.21 32.5 28.21 16.5 .5" />
-		</g>
-		
-		<!-- icons -->
-		<g id="d20-icon">			
-			<polygon fill="#2f74d2" points="10.39 9 10.39 3 5.2 0 0 3 0 9 5.2 12 10.39 9" />
-		</g>
-		<g id="d12-icon">
-			<polygon fill="#da312e" points="11.41 7.85 11.41 4.15 9.23 1.15 5.71 0 2.18 1.15 0 4.15 0 7.85 2.18 10.85 5.71 12 9.23 10.85 11.41 7.85" />
-		</g>
-		<g id="d10-icon">
-			<rect fill="#e97a26" x="1.76" y="1.76" width="8.49" height="8.49" transform="translate(-2.49 6) rotate(-45)" />
-		</g>
-		<g id="d8-icon">
-			<polygon fill="#604896" points="10.39 9 10.39 3 5.2 0 0 3 0 9 5.2 12 10.39 9" />
-		</g>
-		<g id="d6-icon">
-			<polygon fill="#3f9554" points="10.39 9 10.39 3 5.2 0 0 3 0 9 5.2 12 10.39 9" />
-		</g>
-		<g id="d4-icon">
-			<polygon fill="#cd3624" points="6 0 0 10.39 12 10.39 6 0" />
-		</g>
-	</defs>
-</svg>
-<audio id="roll-sound" src="assets/som-dado.mp3"></audio>
-</body>
-<script src="./script.js"></script>
+    <!-- Sprites -->
+    <svg style="display: none">
+      <style>
+        .outer-line {
+          stroke: #000;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .inner-line {
+          stroke: #253d63;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          stroke-width: 0.5px;
+        }
+      </style>
+      <defs>
+        <!-- dice -->
+        <g id="d20">
+          <polygon
+            class="inner-line"
+            points="14.36 7.44 6.84 20.47 21.88 20.47 14.36 7.44"
+          />
+          <line class="inner-line" x1="14.36" y1="7.44" x2="14.36" y2=".5" />
+          <line class="inner-line" x1="21.88" y1="20.47" x2="28.21" y2="8.5" />
+          <line class="inner-line" x1="6.84" y1="20.47" x2="14.36" y2="32.5" />
+          <line class="inner-line" x1="14.36" y1="7.44" x2=".5" y2="8.5" />
+          <line class="inner-line" x1="21.88" y1="20.47" x2="28.21" y2="24.5" />
+          <line class="inner-line" x1="6.84" y1="20.47" x2=".5" y2="24.5" />
+          <line class="inner-line" x1=".5" y1="8.5" x2="6.84" y2="20.47" />
+          <line class="inner-line" x1="14.36" y1="7.44" x2="28.21" y2="8.5" />
+          <line class="inner-line" x1="21.88" y1="20.47" x2="14.36" y2="32.5" />
+          <polygon
+            class="outer-line"
+            style="stroke: #2f74d2"
+            points="28.21 24.5 28.21 8.5 14.36 .5 .5 8.5 .5 24.5 14.36 32.5 28.21 24.5"
+          />
+        </g>
+        <g id="d100">
+          <ellipse
+            class="outer-line"
+            style="stroke: #bdbdbd"
+            cx="16.5"
+            cy="16.5"
+            rx="15.5"
+            ry="15.5"
+          />
+          <ellipse class="inner-line" cx="16.5" cy="16.5" rx="10" ry="10" />
+          <line class="inner-line" x1="16.5" y1="1" x2="16.5" y2="32" />
+          <line class="inner-line" x1="1" y1="16.5" x2="32" y2="16.5" />
+        </g>
+        <g id="d3">
+          <polygon
+            class="outer-line"
+            style="stroke: #ffb300"
+            points="16.5 2 31 29 2 29 16.5 2"
+          />
+          <line class="inner-line" x1="16.5" y1="2" x2="16.5" y2="29" />
+          <line class="inner-line" x1="2" y1="29" x2="24" y2="19" />
+          <line class="inner-line" x1="31" y1="29" x2="9" y2="19" />
+        </g>
+        <g id="d12">
+          <polygon
+            class="inner-line"
+            points="15.72 6.76 6.04 13.79 9.74 25.16 21.69 25.16 25.39 13.79 15.72 6.76"
+          />
+          <line class="inner-line" x1="15.72" y1="6.76" x2="15.72" y2=".5" />
+          <line
+            class="inner-line"
+            x1="25.39"
+            y1="13.79"
+            x2="30.93"
+            y2="11.56"
+          />
+          <line
+            class="inner-line"
+            x1="21.69"
+            y1="25.16"
+            x2="25.12"
+            y2="29.44"
+          />
+          <line class="inner-line" x1="9.74" y1="25.16" x2="6.31" y2="29.44" />
+          <line class="inner-line" x1="6.04" y1="13.79" x2=".5" y2="11.56" />
+          <polygon
+            class="outer-line"
+            style="stroke: #da312e"
+            points="30.93 21.44 30.93 11.56 25.12 3.56 15.72 .5 6.31 3.56 .5 11.56 .5 21.44 6.31 29.44 15.72 32.5 25.12 29.44 30.93 21.44"
+          />
+        </g>
+        <g id="d10">
+          <line class="inner-line" x1="16.5" y1="32.5" x2="16.5" y2="19.21" />
+          <line class="inner-line" x1="8.63" y1="14.77" x2="16.5" y2="19.21" />
+          <line class="inner-line" x1=".5" y1="16.5" x2="8.63" y2="14.77" />
+          <line class="inner-line" x1="16.5" y1=".5" x2="8.63" y2="14.77" />
+          <line class="inner-line" x1="24.37" y1="14.77" x2="16.5" y2="19.21" />
+          <line class="inner-line" x1="32.5" y1="16.5" x2="24.37" y2="14.77" />
+          <line class="inner-line" x1="16.5" y1=".5" x2="24.37" y2="14.77" />
+          <rect
+            class="outer-line"
+            style="stroke: #e97a26"
+            x="5.19"
+            y="5.19"
+            width="22.63"
+            height="22.63"
+            transform="translate(-6.83 16.5) rotate(-45)"
+          />
+        </g>
+        <g id="d8">
+          <line
+            class="inner-line"
+            class="cls-2"
+            x1="14.36"
+            y1=".5"
+            x2=".5"
+            y2="24.5"
+          />
+          <line
+            class="inner-line"
+            class="cls-2"
+            x1="28.21"
+            y1="24.5"
+            x2="14.36"
+            y2=".5"
+          />
+          <line
+            class="inner-line"
+            class="cls-2"
+            x1=".5"
+            y1="24.5"
+            x2="28.21"
+            y2="24.5"
+          />
+          <polygon
+            class="outer-line"
+            style="stroke: #604896"
+            points="28.21 24.5 28.21 8.5 14.36 .5 .5 8.5 .5 24.5 14.36 32.5 28.21 24.5"
+          />
+        </g>
+        <g id="d6">
+          <line class="inner-line" x1="14.36" y1="32.5" x2="14.36" y2="16.5" />
+          <line class="inner-line" x1=".5" y1="8.5" x2="14.36" y2="16.5" />
+          <line class="inner-line" x1="28.21" y1="8.5" x2="14.36" y2="16.5" />
+          <polygon
+            class="outer-line"
+            style="stroke: #3f9554"
+            points="28.21 24.5 28.21 8.5 14.36 .5 .5 8.5 .5 24.5 14.36 32.5 28.21 24.5"
+          />
+        </g>
+        <g id="d4">
+          <line class="inner-line" x1="16.5" y1=".5" x2="16.5" y2="18.98" />
+          <line class="inner-line" x1=".5" y1="28.21" x2="16.5" y2="18.98" />
+          <line class="inner-line" x1="32.5" y1="28.21" x2="16.5" y2="18.98" />
+          <polygon
+            class="outer-line"
+            style="stroke: #cd3624"
+            points="16.5 .5 .5 28.21 32.5 28.21 16.5 .5"
+          />
+        </g>
+
+        <!-- icons -->
+        <g id="d100-icon">
+          <ellipse fill="#bdbdbd" cx="6" cy="6" rx="6" ry="6" />
+        </g>
+        <g id="d3-icon">
+          <polygon fill="#ffb300" points="6 0 12 12 0 12 6 0" />
+        </g>
+        <g id="d20-icon">
+          <polygon
+            fill="#2f74d2"
+            points="10.39 9 10.39 3 5.2 0 0 3 0 9 5.2 12 10.39 9"
+          />
+        </g>
+        <g id="d12-icon">
+          <polygon
+            fill="#da312e"
+            points="11.41 7.85 11.41 4.15 9.23 1.15 5.71 0 2.18 1.15 0 4.15 0 7.85 2.18 10.85 5.71 12 9.23 10.85 11.41 7.85"
+          />
+        </g>
+        <g id="d10-icon">
+          <rect
+            fill="#e97a26"
+            x="1.76"
+            y="1.76"
+            width="8.49"
+            height="8.49"
+            transform="translate(-2.49 6) rotate(-45)"
+          />
+        </g>
+        <g id="d8-icon">
+          <polygon
+            fill="#604896"
+            points="10.39 9 10.39 3 5.2 0 0 3 0 9 5.2 12 10.39 9"
+          />
+        </g>
+        <g id="d6-icon">
+          <polygon
+            fill="#3f9554"
+            points="10.39 9 10.39 3 5.2 0 0 3 0 9 5.2 12 10.39 9"
+          />
+        </g>
+        <g id="d4-icon">
+          <polygon fill="#cd3624" points="6 0 0 10.39 12 10.39 6 0" />
+        </g>
+      </defs>
+    </svg>
+    <audio id="roll-sound" src="assets/som-dado.mp3"></audio>
+  </body>
+  <script src="./script.js"></script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
