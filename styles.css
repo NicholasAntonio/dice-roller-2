@@ -4,7 +4,21 @@
   font-family: "Poppins", sans-serif;
 }
 body {
-    background-image: radial-gradient(circle, #9767b7, #9764ba, #9861bc, #985dbf, #985ac1, #9655c1, #9450c2, #924bc2, #8e42c1, #8939bf, #852fbe, #8023bc);
+  background-image: radial-gradient(
+    circle,
+    #9767b7,
+    #9764ba,
+    #9861bc,
+    #985dbf,
+    #985ac1,
+    #9655c1,
+    #9450c2,
+    #924bc2,
+    #8e42c1,
+    #8939bf,
+    #852fbe,
+    #8023bc
+  );
   display: grid;
   min-height: 100vh;
   place-content: center;
@@ -25,10 +39,24 @@ body {
   max-width: calc(100vw - 80px);
 }
 
-.nexus-title{
-    background-image: linear-gradient(to right top, #ffffff, #f7f7f9, #eeeff3, #e5e7ed, #dbe0e7, #d3dae2, #cad3de, #c2cdd9, #bbc5d5, #b5bcd1, #b1b3cc, #afaac6);
-    color: transparent;
-    background-clip: text;
+.nexus-title {
+  background-image: linear-gradient(
+    to right top,
+    #ffffff,
+    #f7f7f9,
+    #eeeff3,
+    #e5e7ed,
+    #dbe0e7,
+    #d3dae2,
+    #cad3de,
+    #c2cdd9,
+    #bbc5d5,
+    #b5bcd1,
+    #b1b3cc,
+    #afaac6
+  );
+  color: transparent;
+  background-clip: text;
 }
 
 .app-title {
@@ -79,6 +107,7 @@ dice-object[sides="12"] svg {
 
 dice-icon {
   align-items: center;
+
   display: flex;
   flex-direction: column;
 }
@@ -184,11 +213,11 @@ svg {
   }
 }
 
-.roll-and-clear-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+.roll-and-clear-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 #clear:hover,
@@ -233,8 +262,8 @@ input {
   animation: entry ease-in-out 0.9s;
 }
 
-input::placeholder{
-    color:#9e9d9d;
+input::placeholder {
+  color: #9e9d9d;
 }
 
 input::-webkit-inner-spin-button,
